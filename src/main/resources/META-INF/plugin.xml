@@ -21,11 +21,11 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
     <actions>
-        <action id="com.lifecosys.filetruck.MyAction"
-                class="com.lifecosys.filetruck.MyAction"
-                text="My Simple Action"
-                description="Description of My Simple Action">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        <action id="com.lifecosys.filetruck.Base64Encode"
+                class="com.lifecosys.filetruck.Base64Encode"
+                text="Base64 Encode"
+                description="Base64 Encode for file">
+            <add-to-group group-id="HelpMenu" anchor="last"/>
         </action>
     </actions>
 

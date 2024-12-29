@@ -1,37 +1,43 @@
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.1.0"
-    id("org.jetbrains.intellij") version "1.17.4"
+    id("org.jetbrains.intellij.platform") version "2.2.0"
 }
 
 group = "com.lifecosys"
 version = "1.0-SNAPSHOT"
 
+
 repositories {
     mavenLocal()
     maven {
-        url=uri("https://maven.aliyun.com/repository/public")
+        url = uri("https://maven.aliyun.com/repository/public")
+    }
+    intellijPlatform {
+        defaultRepositories()
     }
 }
 
-intellij {
-    localPath.set("/develop/tools/jetbrain/ideaIC-2024.3.1.1/idea-IC-243.22562.218/")
-    //    version.set("2023.2.6")
-    //    type.set("IC") // Target IDE Platform
-
-    plugins.set(listOf(/* Plugin Dependencies */))
-    // 移除最高版本限制
-    updateSinceUntilBuild.set(true)
+dependencies {
+    intellijPlatform {
+        intellijIdeaCommunity("2024.3.1")
+    }
 }
 
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+kotlin {
+    jvmToolchain(21)
+}
 
 tasks {
-    // Set the JVM compatibility versions
-    withType<JavaCompile> {
-        sourceCompatibility = "21"
-        targetCompatibility = "21"
-    }
-    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+
+    compileKotlin {
         kotlinOptions.jvmTarget = "21"
     }
 
