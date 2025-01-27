@@ -14,18 +14,17 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    A simple plugin demo for quick start, just a test and demo for how to develop a idea plugin
+    Developer utils for file operation, such as MD5,Base64 and zip to easy share etc.
   ]]></description>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
     <actions>
-        <action id="com.lifecosys.filetruck.Base64Encode"
-                class="com.lifecosys.filetruck.Base64Encode"
-                text="Base64 Encode"
-                description="Base64 Encode for file">
-            <add-to-group group-id="HelpMenu" anchor="last"/>
+        <action id="com.lifecosys.filetruck.ZipAction"
+                class="com.lifecosys.filetruck.ZipAction"
+                text="Zip and Copy Path"
+                description="Zip a director to temp dir of .idea and copy the path to system clipboard to easy sharing such as email it.">
         </action>
     </actions>
 

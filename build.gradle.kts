@@ -1,7 +1,7 @@
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "2.1.0"
-    id("org.jetbrains.intellij.platform") version "2.2.0"
+    id("org.jetbrains.kotlin.jvm") version "1.9.25"
+    id("org.jetbrains.intellij") version "1.17.4"
 }
 
 group = "com.lifecosys"
@@ -13,45 +13,39 @@ repositories {
     maven {
         url = uri("https://maven.aliyun.com/repository/public")
     }
-    intellijPlatform {
-        defaultRepositories()
-    }
 }
 
-dependencies {
-    intellijPlatform {
-        intellijIdeaCommunity("2024.3.1")
-    }
+// Configure Gradle IntelliJ Plugin
+// Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
+intellij {
+//    version.set("2024.1.7")
+    type.set("IC") // Target IDE Platform
+    localPath.set("/develop/tools/jetbrain/idea-ic-testing")
+//    plugins.set(listOf(/* Plugin Dependencies */))
 }
 
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+tasks {
+    // Set the JVM compatibility versions
+    withType<JavaCompile> {
+        sourceCompatibility = "21"
+        targetCompatibility = "21"
     }
-}
-
-kotlin {
-    jvmToolchain(21)
-}
-
-intellijPlatform{
-    projectName="File Truck"
-
-    pluginConfiguration{
-        ideaVersion{
-            sinceBuild = "2024.2.1"
-            untilBuild = "2025.3.1"
-        }
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions.jvmTarget = "21"
     }
 
-    signing{
+    patchPluginXml {
+        sinceBuild.set("241")
+        untilBuild.set("243.23654.117")
+    }
+
+    signPlugin {
         certificateChainFile.set(file("/develop/sourcecode/file-truck/sign/chain.crt"))
         privateKeyFile.set(file("/develop/sourcecode/file-truck/sign/private.pem"))
         password.set("TODO")
     }
 
-    publishing {
+    publishPlugin {
         token.set("TODO")
     }
 }
