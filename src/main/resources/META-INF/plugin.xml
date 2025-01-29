@@ -25,6 +25,7 @@
                 class="com.lifecosys.filetruck.ZipAction"
                 text="Zip and Copy Path"
                 description="Zip a director to temp dir of .idea and copy the path to system clipboard to easy sharing such as email it.">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
     </actions>
 
